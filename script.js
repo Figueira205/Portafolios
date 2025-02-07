@@ -1,35 +1,50 @@
 // script.js
 
-// Función para ejecutar acciones cuando la página cargue
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Portafolio cargado exitosamente.');
 
-    // Ejemplo de interacción: Cambiar el texto del encabezado al hacer clic
-    const header = document.querySelector('header');
-    header.addEventListener('click', function () {
-        alert('¡Gracias por visitar mi portafolio!');
+    // Seleccionar todos los enlaces con la clase "links"
+    document.querySelectorAll('.links').forEach(link => {
+        link.addEventListener('click', function () {
+            alert('¡Gracias por visitar mi portafolio!');
+        });
     });
-});
 
-// Obtener el botón de cambio de tema
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+    // Obtener el botón de cambio de tema y el body
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-// Verificar si el usuario ya seleccionó un tema previamente
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    body.classList.add('dark-mode');
-}
-
-// Función para alternar el tema
-function toggleTheme() {
-    body.classList.toggle('dark-mode');
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark'); // Guardar preferencia en modo oscuro
+    // Verificar si el usuario ya seleccionó un tema previamente
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.innerHTML = '☀️'; // Cambia a sol
     } else {
-        localStorage.setItem('theme', 'light'); // Guardar preferencia en modo claro
+        themeToggle.innerHTML = '🌙'; // Cambia a luna
     }
-}
 
-// Asignar la función al botón
-themeToggle.addEventListener('click', toggleTheme);
+    // Función para alternar el tema con animación
+    function toggleTheme() {
+        body.classList.add('transition-theme'); // Agregar animación
+
+        if (body.classList.contains('dark-mode')) {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '🌙'; // Cambia a luna
+        } else {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '☀️'; // Cambia a sol
+        }
+
+        // Eliminar la clase de transición después de la animación
+        setTimeout(() => {
+            body.classList.remove('transition-theme');
+        }, 300);
+    }
+
+    // Asignar la función al botón
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+});

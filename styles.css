@@ -134,7 +134,7 @@ body.dark-mode .project a:hover {
 }
 
 body.dark-mode footer {
-    background: #121212;
+    background: #272727;;
 }
 
 body.dark-mode .skill {
@@ -151,7 +151,62 @@ body.dark-mode .project p {
     color: #ffffff;
 }
 
+<<<<<<< HEAD
 body.dark-mode .project h3 {
     margin-top: 0;
     color: #ffffff;
 }
+
+/* Animación de transición para el modo oscuro */
+body {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Animación para el botón del tema */
+#theme-toggle {
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto de rotación al cambiar de luna a sol */
+.dark-mode #theme-toggle {
+    transform: rotate(180deg);
+}
+
+/* Efecto de fade-in y fade-out en el cuerpo */
+.transition-theme {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Modo oscuro */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Cambiar el color de los enlaces en modo oscuro */
+.dark-mode header  a {
+    color: #bb86fc;
+}
+
+/* Reducir el brillo de la imagen en modo oscuro */
+.dark-mode .profile img {
+    filter: brightness(0.8);
+}
+
+#link-c{
+    color: #bb86fc;
+}
+
+.dark-mode #link-c{
+    color: #bb86fc;
+}
+=======
+body.dark-mode .project h3 {
+    margin-top: 0;
+    color: #ffffff;
+}
+>>>>>>> c629e980bd84590751337b9ae00d0a853df6879f

@@ -150,3 +150,8 @@ body.dark-mode #theme-toggle {
 body.dark-mode .project p {
     color: #ffffff;
 }
+
+body.dark-mode .project h3 {
+    margin-top: 0;
+    color: #ffffff;
+}

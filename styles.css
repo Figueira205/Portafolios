@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    background: #007BFF;
+    background: #2a3c50;
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -63,7 +63,7 @@ h2 {
 .project a {
     display: inline-block;
     margin-top: 10px;
-    background: #007BFF;
+    background: #2a3c50;
     color: white;
     padding: 8px 12px;
     border-radius: 4px;

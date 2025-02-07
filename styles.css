@@ -97,3 +97,52 @@ footer {
     font-size: 0.9em;
     color: #333;
 }
+
+/* Botón para cambiar de tema */
+#theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white; /* Color del ícono en modo claro */
+}
+
+/* Tema oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background: #1e1e1e;
+}
+
+body.dark-mode .project {
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+
+body.dark-mode .project a {
+    background: #4caf50;
+}
+
+body.dark-mode .project a:hover {
+    background: #388e3c;
+}
+
+body.dark-mode footer {
+    background: #121212;
+}
+
+body.dark-mode .skill {
+    background: #333;
+    color: #e0e0e0;
+}
+
+/* Cambiar color del botón en modo oscuro */
+body.dark-mode #theme-toggle {
+    color: #e0e0e0; /* Color del ícono en modo oscuro */
+}

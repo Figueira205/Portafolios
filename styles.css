@@ -146,3 +146,7 @@ body.dark-mode .skill {
 body.dark-mode #theme-toggle {
     color: #e0e0e0; /* Color del ícono en modo oscuro */
 }
+
+body.dark-mode .project p {
+    color: #ffffff;
+}

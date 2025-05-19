@@ -208,3 +208,10 @@ body.dark-mode .project h3 {
     margin-top: 0;
     color: #ffffff;
 }
+
+@media (min-width: 769px){
+.acerca{
+    margin-left: 40px;
+    margin-right: 40px;
+    }
+}

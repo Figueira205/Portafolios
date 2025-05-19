@@ -210,7 +210,7 @@ body.dark-mode .project h3 {
 }
 
 @media (min-width: 769px){
-.acerca{
+p .acerca{
     margin-left: 40px;
     margin-right: 40px;
     }

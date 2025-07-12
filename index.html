@@ -1,79 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Jose Figueira</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio Web</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@headlessui/react@latest/dist/headlessui.umd.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <div class="profile">
-            <button id="theme-toggle" title="Alternar modo oscuro">🌙</button> <!-- Botón para cambiar de tema -->
-            <img src="./recursos/yo.jpg" alt="Jose Figueira">
-            <h1>Jose Figueira</h1>
-            <p>Desarrollador Web | Finanzas & Gestión | Diseñador Gráfico</p>
-            <div class="social-links">
-                <a class="links" href="https://github.com/Figueira205" target="_blank">GitHub</a>
-                <a class="links" href="https://twitch.tv/figueira205" target="_blank">Twitch</a>
-                <a class="links" href="https://twitter.com/josefigueira_20" target="_blank">Twitter</a>
-                <a href="https://www.linkedin.com/in/jose-figueira-malave-692971226/" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">[Tu Nombre]</h1>
+      <nav class="space-x-6">
+        <a href="#about" class="hover:text-blue-600 transition">Sobre mí</a>
+        <a href="#skills" class="hover:text-blue-600 transition">Habilidades</a>
+        <a href="#projects" class="hover:text-blue-600 transition">Proyectos</a>
+        <a href="#contact" class="hover:text-blue-600 transition">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
-    <section>
-        <h2>Acerca de mí</h2>
-        <p class="acerca">Soy un desarrollador web con experiencia en finanzas y gestión, además de habilidades en diseño gráfico utilizando herramientas como Adobe Photoshop e Illustrator. Me apasiona crear soluciones tecnológicas innovadoras que mejoren la vida diaria de las personas.</p>
-    </section>
+  <section id="hero" class="text-center py-20 bg-blue-50 fade-in">
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">Hola, soy [Tu Nombre]</h2>
+    <p class="text-lg md:text-xl max-w-xl mx-auto">Desarrollador web especializado en frontend con experiencia en Vue.js, personalización de módulos en Odoo para CRM y ERP, y automatizaciones con n8n, Make y asistentes virtuales usando APIs de IA.</p>
+    <div class="mt-6">
+      <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Contáctame</a>
+    </div>
+  </section>
 
-    <section>
-        <h2>Habilidades</h2>
-        <div class="skills">
-            <span class="skill">HTML</span>
-            <span class="skill">CSS</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">Photoshop</span>
-            <span class="skill">Illustrator</span>
-            <span class="skill">Gestión Financiera</span>
-            <span class="skill">Diseño Web</span>
-            <span class="skill">Desarrollo Frontend</span>
-        </div>
-    </section>
+  <section id="about" class="py-20 bg-white fade-in">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="text-3xl font-bold mb-6 text-center">Sobre mí</h3>
+      <p class="text-lg leading-relaxed">Actualmente desarrollo módulos personalizados en Odoo para una empresa de logística (gestión de flotas) y un despacho de abogados (gestión documental y operaciones). Además, tengo experiencia en desarrollo web con Vue.js, integración de APIs, y diseño con herramientas como Figma, Illustrator y Photoshop. Realizo automatizaciones con n8n y Make conectando con APIs como ChatGPT, Gemini y DeepSeek.</p>
+    </div>
+  </section>
 
-    <section class="projects">
-        <h2>Proyectos Destacados</h2>
-        <div class="project">
-            <h3>Cointhrive</h3>
-            <p>Plataforma de administración financiera y gestión de gastos diseñada para ayudar a las empresas a optimizar sus recursos (Diseño de Vista Frontend).</p>
-            <a href="https://github.com/Figueira205/Cointhrive" target="_blank">Ver en GitHub</a>
-        </div>
-        <div class="project">
-            <h3>Planes de Pago</h3>
-            <p>Sistema que facilita la creación de planes de pago personalizados para despachos legales en España Completamente Funcional con funcionalidades para descargar planes en formato pdf.</p>
-            <a href="https://github.com/Figueira205/Planes-de-Pago" target="_blank">Ver en GitHub</a>
-        </div>
-        <div class="project">
-            <h3>Fratelli d'Italia</h3>
-            <p>Página web para una pizzería con un diseño moderno y atractivo que refleja la esencia italiana (Diseño Frontend).</p>
-            <a href="https://github.com/Figueira205/fratelli-d-italia" target="_blank">Ver en GitHub</a>
-        </div>
-    </section>
+  <section id="skills" class="py-20 bg-gray-50 fade-in">
+    <div class="max-w-5xl mx-auto px-4">
+      <h3 class="text-3xl font-bold mb-10 text-center">Habilidades</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div><i class="fab fa-vuejs text-4xl text-green-500"></i><p>Vue.js</p></div>
+        <div><i class="fas fa-database text-4xl text-blue-500"></i><p>SQL básico</p></div>
+        <div><i class="fas fa-cogs text-4xl text-gray-700"></i><p>Odoo CRM/ERP</p></div>
+        <div><i class="fas fa-magic text-4xl text-purple-600"></i><p>n8n / Make</p></div>
+        <div><i class="fab fa-figma text-4xl text-pink-500"></i><p>Figma</p></div>
+        <div><i class="fab fa-adobe text-4xl text-red-600"></i><p>Photoshop / Illustrator</p></div>
+        <div><i class="fas fa-robot text-4xl text-yellow-500"></i><p>IA APIs (GPT, Gemini...)</p></div>
+        <div><i class="fas fa-code text-4xl text-indigo-500"></i><p>Integraciones Backend</p></div>
+      </div>
+    </div>
+  </section>
 
-    <section>
-        <h2>Experiencia Reciente</h2>
-        <div class="experience">
-            <h3>Creditaria Estudio Legal</h3>
-            <p><strong>Rol:</strong> Desarrollador Web</p>
-            <p><strong>Descripción:</strong> Recientemente, formé parte del equipo responsable del desarrollo de la página web de <a id="link-c" href="https://www.creditaria.com/" target="_blank"> <b>Creditaria Estudio Legal</b></a>. Mi trabajo incluyó la implementación de funcionalidades clave, optimización del rendimiento y asegurar una experiencia de usuario fluida y atractiva.</p>
-            <p><strong>Tecnologías utilizadas:</strong> HTML, CSS, JavaScript, Gestión de contenido (CMS).</p>
+  <section id="projects" class="py-20 bg-white fade-in">
+    <div class="max-w-5xl mx-auto px-4">
+      <h3 class="text-3xl font-bold mb-10 text-center">Proyectos</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <h4 class="text-xl font-semibold mb-2">Módulo ERP Logística</h4>
+          <p>Gestión avanzada de flotas en Odoo para empresa de transporte.</p>
         </div>
-    </section>
+        <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <h4 class="text-xl font-semibold mb-2">Módulo CRM Abogados</h4>
+          <p>Automatización de gestión documental y operaciones legales en despacho jurídico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2023 Jose Figueira | Todos los derechos reservados</p>
-    </footer>
+  <section id="contact" class="py-20 bg-gray-50 fade-in">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-bold mb-6">Contáctame</h3>
+      <p class="mb-4">¿Tienes un proyecto en mente o deseas saber más? Estoy disponible para colaboraciones.</p>
+      <a href="mailto:tuemail@ejemplo.com" class="text-blue-600 font-medium">tuemail@ejemplo.com</a>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <footer class="text-center py-6 text-sm text-gray-500">
+    &copy; 2025 [Tu Nombre]. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    // Animaciones fade-in al hacer scroll
+    const elements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>

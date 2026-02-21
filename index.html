@@ -1,384 +1,432 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio Web</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@headlessui/react@latest/dist/headlessui.umd.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jose Figueira | Frontend Developer & Automation</title>
+  <meta name="description"
+    content="Portfolio of Jose Figueira - Frontend Developer specializing in Vue.js, Odoo, and Automation.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#a855f7',
+            dark: '#09090b',
+            'dark-lighter': '#18181b',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: none;
-    }
-    body.dark {
-      background-color: #18181b;
-      color: #e5e7eb;
-    }
-    body.dark header,
-    body.dark section,
-    body.dark footer {
-      background-color: #23232a !important;
-      color: #e5e7eb !important;
-    }
-    body.dark .bg-white { background-color: #23232a !important; }
-    body.dark .bg-gray-50 { background-color: #23232a !important; }
-    body.dark .bg-gray-100 { background-color: #2d2d36 !important; }
-    body.dark .text-gray-800,
-    body.dark .text-gray-700,
-    body.dark .text-gray-500 { color: #e5e7eb !important; }
-    body.dark a { color: #60a5fa; }
-    body.dark .shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.7); }
-    body.dark .carousel-card {
-      background: #2d2d36 !important;
-    }
-    
-    #carousel-viewport {
-      width: 960px;
-      max-width: 100%;
-      height: 340px;
-      overflow: hidden;
-      position: relative;
-      margin: 0 auto;
-    }
-    #carousel-track {
-      display: flex;
-      transition: transform 0.6s ease-in-out;
-      will-change: transform;
-      height: 340px;
-    }
-    .carousel-card {
-      min-width: 320px;
-      max-width: 320px;
-      height: 320px;
-      margin: 10px;
-      background: #f3f4f6;
-      border-radius: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-      opacity: 0.7;
-      z-index: 1;
-      transition: box-shadow 0.4s ease, opacity 0.4s ease, transform 0.6s ease;
-      transform: scale(0.92);
-    }
-    .carousel-card.center {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      opacity: 1;
-      z-index: 2;
-      transform: scale(1.05);
-    }
-  </style>
+  </script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Jose Figueira</h1>
-      <nav class="space-x-6 flex items-center">
-        <a href="#about" class="hover:text-blue-600 transition">Sobre mí</a>
-        <a href="#skills" class="hover:text-blue-600 transition">Habilidades</a>
-        <a href="#projects" class="hover:text-blue-600 transition">Proyectos</a>
-        <a href="#contact" class="hover:text-blue-600 transition">Contacto</a>
-        <!-- Botón modo oscuro -->
-        <button id="darkModeToggle" class="ml-4 text-2xl focus:outline-none" aria-label="Toggle dark mode">
-          <i id="darkModeIcon" class="fas fa-moon"></i>
-        </button>
+
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Background Mesh -->
+  <div class="mesh-bg"></div>
+
+  <!-- Navigation -->
+  <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+    <div
+      class="glass mx-auto max-w-7xl px-6 py-4 mt-4 rounded-xl flex justify-between items-center border border-white/5 mx-4 md:mx-auto">
+      <a href="#" class="text-2xl font-bold tracking-tighter text-white hover:text-indigo-400 transition-colors">
+        JF<span class="text-indigo-500">.</span>
+      </a>
+
+      <nav class="hidden md:flex space-x-8">
+        <a href="#about" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Sobre mí</a>
+        <a href="#experience"
+          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Experiencia</a>
+        <a href="#projects" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Proyectos</a>
+        <a href="#skills" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">Skills</a>
       </nav>
+
+      <a href="#contact"
+        class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold text-white transition-all duration-200 bg-indigo-600 rounded-full hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/20">
+        Contactar
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="hidden absolute top-20 left-4 right-4 glass rounded-xl p-4 flex-col space-y-4 md:hidden">
+      <a href="#about" class="block text-zinc-400 hover:text-white">Sobre mí</a>
+      <a href="#experience" class="block text-zinc-400 hover:text-white">Experiencia</a>
+      <a href="#projects" class="block text-zinc-400 hover:text-white">Proyectos</a>
+      <a href="#contact" class="block text-indigo-400 font-bold">Contactar</a>
     </div>
   </header>
 
-  <section id="hero" class="text-center py-20 bg-blue-50 fade-in">
-    <img src="recursos/yo.jpg" alt="Foto de Perfil" class="w-36 h-36 rounded-full mx-auto mb-6">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4">Hola, soy Jose Figueira</h2>
-    <p class="text-lg md:text-xl max-w-xl mx-auto">Desarrollador web especializado en frontend con experiencia en Vue.js, personalización de módulos en Odoo para CRM y ERP, y automatizaciones con n8n, Make y asistentes virtuales usando APIs de IA.</p>
-    <div class="mt-6">
-      <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Contáctame</a>
-    </div>
-  </section>
+  <!-- Hero Section -->
+  <section
+    class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative overflow-hidden">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -z-10 animate-float"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl -z-10 animate-float"
+      style="animation-delay: 2s;"></div>
 
-  <section id="about" class="py-20 bg-white fade-in">
-    <div class="max-w-4xl mx-auto px-4">
-      <h3 class="text-3xl font-bold mb-6 text-center">Sobre mí</h3>
-      <p class="text-lg leading-relaxed">Actualmente desarrollo módulos personalizados en Odoo para una empresa de logística (gestión de flotas) y un despacho de abogados (gestión documental y operaciones). Además, tengo experiencia en desarrollo web con Vue.js, integración de APIs, y diseño con herramientas como Figma, Illustrator y Photoshop. Realizo automatizaciones con n8n y Make conectando con APIs como ChatGPT, Gemini y DeepSeek con el objetivo de automatizar y mejorar flujos de trabajo.</p>
-    </div>
-  </section>
+    <div class="relative z-10 max-w-4xl reveal active flex flex-col items-center">
 
-  <section id="skills" class="py-20 bg-gray-50 fade-in">
-    <div class="max-w-5xl mx-auto px-4">
-      <h3 class="text-3xl font-bold mb-10 text-center">Habilidades</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center" style="align-items:end;">
-        <div><i class="fab fa-vuejs text-4xl text-green-500"></i><p>Vue.js</p></div>
-        <div><i class="fas fa-database text-4xl text-blue-500"></i><p>SQL básico</p></div>
-        <div><i class="fas fa-cogs text-4xl text-gray-700"></i><p>Odoo CRM/ERP</p></div>
-        <div><i class="fas fa-magic text-4xl text-purple-600"></i><p>n8n / Make</p></div>
-        <div><i class="fab fa-figma text-4xl text-pink-500"></i><p>Figma</p></div>
-        <div><i class="fab fa-adobe text-4xl text-red-600"></i><img src="recursos/illustrador.png" alt="P&I" style="width: 38px; height:38px; display:block; margin:auto;"><p>Photoshop / Illustrator</p></div>
-        <div><i class="fas fa-robot text-4xl text-yellow-500"></i><p>IA APIs (GPT, Gemini...)</p></div>
-        <div><i class="fas fa-code text-4xl text-indigo-500"></i><p>Integraciones Backend</p></div>
+      <!-- Profile Image (New) -->
+      <div
+        class="w-32 h-32 md:w-36 md:h-36 mb-8 rounded-full p-1 bg-gradient-to-r from-indigo-500 to-purple-500 shadow-2xl shadow-indigo-500/20">
+        <img src="foto.jpeg" alt="Jose Figueira"
+          class="w-full h-full object-cover rounded-full border-4 border-dark hover:scale-105 transition-transform duration-300 grayscale hover:grayscale-0">
+      </div>
+
+      <div
+        class="inline-block px-4 py-1.5 mb-6 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-medium uppercase tracking-wider">
+        Disponible para proyectos
+      </div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-8">
+        Frontend <br />
+        <span class="text-gradient-primary">Developer</span>
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
+        Especializado en crear experiencias web modernas y automatizaciones eficientes.
+        Experto en <span class="text-white font-semibold">Vue.js</span>, <span
+          class="text-white font-semibold">Odoo</span> y <span class="text-white font-semibold">AI Integration</span>.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#projects"
+          class="px-8 py-3.5 rounded-full bg-white text-dark font-bold hover:bg-zinc-200 transition-all transform hover:scale-105">
+          Ver Proyectos
+        </a>
+        <a href="https://github.com/Figueira205" target="_blank"
+          class="px-8 py-3.5 rounded-full glass text-white font-medium hover:bg-white/10 transition-all border border-white/10 flex items-center gap-2">
+          <i class="fab fa-github text-xl"></i> GitHub
+        </a>
       </div>
     </div>
+
+    <div class="absolute bottom-10 animate-bounce text-zinc-500">
+      <i class="fas fa-chevron-down"></i>
+    </div>
   </section>
 
-  <section id="projects" class="py-20 bg-white fade-in">
-    <div class="max-w-5xl mx-auto px-4">
-      <h3 class="text-3xl font-bold mb-10 text-center">Proyectos</h3>
-      <div class="relative flex items-center justify-center">
-        <button id="carousel-prev" class="absolute left-0 z-10 bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-700 transition focus:outline-none">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <div id="carousel-viewport">
-          <div id="carousel-track"></div>
+  <!-- Tech Stack / Skills (Expanded) -->
+  <section id="skills" class="py-20 px-4 relative">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-center text-zinc-500 uppercase tracking-widest text-sm mb-12">Tecnologías Principales</p>
+      <div class="flex flex-wrap justify-center gap-10 md:gap-14 opacity-80 reveal">
+        <!-- Javascript -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-js text-4xl md:text-5xl text-yellow-400 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">JavaScript</span>
         </div>
-        <button id="carousel-next" class="absolute right-0 z-10 bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-700 transition focus:outline-none">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+        <!-- HTML5 -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-html5 text-4xl md:text-5xl text-orange-500 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">HTML5</span>
+        </div>
+        <!-- Vue.js -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-vuejs text-4xl md:text-5xl text-green-500 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Vue.js</span>
+        </div>
+        <!-- CSS3 -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-css3-alt text-4xl md:text-5xl text-blue-500 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">CSS3</span>
+        </div>
+        <!-- Wordpress -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-wordpress text-4xl md:text-5xl text-cyan-600 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(8,145,178,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">WordPress</span>
+        </div>
+        <!-- WooCommerce (Cart) -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fas fa-shopping-cart text-4xl md:text-5xl text-purple-400 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">WooCommerce</span>
+        </div>
+        <!-- GitHub -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fab fa-github text-4xl md:text-5xl text-white transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">GitHub</span>
+        </div>
+        <!-- AI/Robot -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fas fa-robot text-4xl md:text-5xl text-indigo-400 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]"></i>
+          <span class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">AI
+            Dev</span>
+        </div>
+        <!-- UI/UX -->
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fas fa-pen-nib text-4xl md:text-5xl text-pink-500 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">UI/UX</span>
+        </div>
+
+        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+          <i
+            class="fas fa-bolt text-4xl md:text-5xl text-orange-500 transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]"></i>
+          <span
+            class="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">n8n /
+            Make</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-24 px-4 relative">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 text-white reveal">Servicios y Especialización</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Odoo Modules -->
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group reveal">
+          <div class="relative z-10 flex flex-col gap-6 items-start">
+            <div class="bg-purple-500/20 p-4 rounded-xl text-purple-400">
+              <i class="fas fa-cogs text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Desarrollo Odoo ERP/CRM</h3>
+              <p class="text-zinc-400 mb-4 text-sm leading-relaxed">
+                Personalización avanzada de módulos para optimizar procesos empresariales complejos. Gestión de flotas,
+                documental y ventas.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Web & Ecommerce -->
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group reveal">
+          <div class="relative z-10 flex flex-col gap-6 items-start">
+            <div class="bg-emerald-500/20 p-4 rounded-xl text-emerald-400">
+              <i class="fas fa-code text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Web & Ecommerce a Medida</h3>
+              <p class="text-zinc-400 mb-4 text-sm leading-relaxed">
+                Desarrollo de plataformas de venta online y sitios corporativos de alto impacto con integración de
+                pasarelas de pago.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation & AI help -->
+        <div class="glass-card p-8 rounded-2xl md:col-span-2 relative overflow-hidden group reveal">
+          <div class="absolute right-0 top-0 p-10 opacity-5">
+            <i class="fas fa-robot text-8xl text-white"></i>
+          </div>
+          <div class="relative z-10 flex flex-col md:flex-row gap-6 items-center">
+            <div class="bg-indigo-500/20 p-4 rounded-xl text-indigo-400">
+              <i class="fas fa-magic text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-2">Automatización & IA</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Implementación de flujos de trabajo automatizados con n8n y Make, integrando Inteligencia Artificial
+                para potenciar la productividad.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-  
- <script>
-  const projects = [
-    {
-      title: "Módulo ERP Logística",
-      desc: "Gestión avanzada de flotas en Odoo para empresa de transporte.",
-      link: "",
-      github: null
-    },
-    {
-      title: "Módulo CRM Abogados",
-      desc: "Automatización de gestión documental y operaciones legales en despacho jurídico.",
-      link: "",
-      github: null
-    },
-    {
-      title: "Planes de Pago (Ley Segunda Oportunidad)",
-      desc: "Web para crear planes de pago personalizados para personas que buscan acogerse a la Ley de Segunda Oportunidad en España.",
-      link: "https://github.com/Figueira205/Planes-de-Pago",
-      github: true
-    },
-    {
-      title: "Cointhrive Mobile",
-      desc: "Gestión de finanzas con monitoreo de ingresos y planes de suscripción personalizados.",
-      link: "https://github.com/Figueira205/Cointhrive-Mobile",
-      github: true
-    },
-    {
-      title: "Fratelli d'Italia",
-      desc: "Sitio web para pizzería italiana con menú, contacto y diseño atractivo.",
-      link: "https://github.com/Figueira205/fratelli-d-italia",
-      github: true
-    }
-  ];
 
-  const track = document.getElementById('carousel-track');
-  const cardWidth = 340; // 320px + 20px margin
-  let currentIndex = 0;
+  <!-- Projects Section (Updated with Ramirez & Exoneris) -->
+  <section id="projects" class="py-24 px-4 bg-zinc-900/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 text-white reveal">Proyectos Destacados</h2>
+      <p class="text-center text-zinc-400 mb-16 max-w-2xl mx-auto reveal">Una selección de trabajos recientes incluyendo
+        desarrollos corporativos y aplicaciones web.</p>
 
-  function initCarousel() {
-    // Crear múltiples copias para efecto infinito perfecto
-    const allProjects = [...projects, ...projects, ...projects];
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
 
-    track.innerHTML = '';
-    allProjects.forEach((p) => {
-      const card = document.createElement('div');
-      card.className = 'carousel-card';
-      card.innerHTML = `
-        <h4 class="text-xl font-semibold mb-2">${p.title}</h4>
-        <p class="mb-4">${p.desc}</p>
-        ${p.github ? `<a href="${p.link}" target="_blank" class="mt-auto inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-          Ver en GitHub <i class="fab fa-github ml-2"></i>
-        </a>` : ""}
-      `;
-      track.appendChild(card);
-    });
+        <!-- Exoneris (Featured Large) -->
+        <div
+          class="glass-card rounded-2xl p-8 md:col-span-2 relative group overflow-hidden flex flex-col justify-end reveal cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10"></div>
+          <div class="absolute inset-0 bg-indigo-900/40 group-hover:scale-105 transition-transform duration-700"></div>
+          <!-- Decorative Icon Background -->
+          <div
+            class="absolute top-4 right-4 text-white/5 text-9xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+            <i class="fas fa-scale-balanced"></i>
+          </div>
 
-    // Empezar desde el segundo conjunto (índices 5-9) para tener espacio para ir hacia atrás
-    currentIndex = projects.length; // Comenzar en el índice 5
-    const initialOffset = (960 / 2) - (cardWidth / 2) - (currentIndex * cardWidth);
-    track.style.transition = 'none';
-    track.style.transform = `translateX(${initialOffset}px)`;
-    
-    setTimeout(highlightCenterCard, 10);
-  }
+          <div class="relative z-20">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-3xl font-bold text-white">Exoneris Abogados</h3>
+              <span
+                class="bg-indigo-600/30 border border-indigo-400/30 text-indigo-200 text-xs px-3 py-1 rounded-full uppercase tracking-wider">Corporate</span>
+            </div>
+            <p class="text-zinc-300 mb-6 text-lg max-w-lg">Plataforma corporativa para uso del despacho legal especializado.
+              Diseño centrado en la conversión de leads y gestión de casos de Ley de Segunda Oportunidad.</p>
+            <div class="flex gap-3">
+              <span
+                class="px-3 py-1 text-xs font-bold rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300">UX/UI
+                Design</span>
+              <span
+                class="px-3 py-1 text-xs font-bold rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300">Lead
+                Gen</span>
+              <span
+                class="px-3 py-1 text-xs font-bold rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300">SEO</span>
+            </div>
+          </div>
+        </div>
 
-  function highlightCenterCard() {
-    const cards = track.querySelectorAll('.carousel-card');
-    cards.forEach(card => card.classList.remove('center'));
+        <!-- Ramirez de Lozasa -->
+        <div
+          class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-end reveal cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
+          <div class="absolute inset-0 bg-rose-900/40 group-hover:scale-105 transition-transform duration-700"></div>
 
-    // Calcular qué tarjeta está más cerca del centro del viewport
-    const viewportCenter = 960 / 2;
-    let closestIndex = 0;
-    let closestDistance = Infinity;
+          <div class="relative z-20">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">Ramirez de Lozasa</h3>
+              <a href="https://www.ramirezdelosada.com" target="_blank"
+                class="text-white bg-white/10 p-2 rounded-full hover:bg-white/20 transition"><i
+                  class="fas fa-external-link-alt"></i></a>
+            </div>
+            <p class="text-zinc-300 text-sm mb-4">Catálogo digital para la compra de vinos. Web accesible y optimizada para todos los dispositivos.
+            </p>
+            <div class="flex gap-2 flex-wrap">
+              <span
+                class="px-2 py-1 text-[10px] font-bold rounded-full bg-rose-600/50 text-white border border-rose-500/30">Winery</span>
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-zinc-700/50 text-white">Catalog</span>
+            </div>
+          </div>
+        </div>
 
-    cards.forEach((card, index) => {
-      const cardRect = card.getBoundingClientRect();
-      const trackRect = track.parentElement.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2 - trackRect.left;
-      const distance = Math.abs(cardCenter - viewportCenter);
-      
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
+        <!-- CRM Odoo (Project) -->
+        <div
+          class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-end reveal cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
+          <div class="absolute inset-0 bg-purple-900/40 group-hover:scale-105 transition-transform duration-700"></div>
+          <div class="absolute top-4 right-4 text-white/10 text-6xl">
+            <i class="fas fa-gavel"></i>
+          </div>
 
-    if (cards[closestIndex]) {
-      cards[closestIndex].classList.add('center');
-    }
-  }
+          <div class="relative z-20">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">CRM con Odoo</h3>
+            </div>
+            <p class="text-purple-300 text-xs mb-2 uppercase tracking-wide">Creditaria Estudio Legal</p>
+            <p class="text-zinc-300 text-sm mb-4">CRM a medida con módulos personalizados para gestión de expedientes.
+            </p>
+            <div class="flex gap-2 flex-wrap">
+              <span
+                class="px-2 py-1 text-[10px] font-bold rounded-full bg-purple-600/50 text-white border border-purple-500/30">Odoo</span>
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-zinc-700/50 text-white">Python</span>
+            </div>
+          </div>
+        </div>
 
-  function slide(direction) {
-    const totalCards = projects.length * 3; // Total de tarjetas incluyendo copias
-    
-    if (direction === 'next') {
-      currentIndex++;
-    } else {
-      currentIndex--;
-    }
+        <!-- Planes de Pago (Github) -->
+        <div
+          class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-end reveal cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
+          <div class="absolute inset-0 bg-blue-900/30 group-hover:scale-105 transition-transform duration-700"></div>
 
-    // Calcular nueva posición para centrar la tarjeta actual
-    const newOffset = (960 / 2) - (cardWidth / 2) - (currentIndex * cardWidth);
-    track.style.transition = 'transform 0.4s ease-in-out';
-    track.style.transform = `translateX(${newOffset}px)`;
+          <div class="relative z-20">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">Planes de Pago</h3>
+              <a href="https://github.com/Figueira205/Planes-de-Pago" target="_blank"
+                class="text-white bg-white/10 p-2 rounded-full hover:bg-white/20 transition"><i
+                  class="fab fa-github"></i></a>
+            </div>
+            <p class="text-zinc-300 text-sm mb-4">Calculadora legal para la Ley de Segunda Oportunidad.</p>
+            <div class="flex gap-2">
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-blue-500/50 text-white">Vue.js</span>
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-zinc-700/50 text-white">Tool</span>
+            </div>
+          </div>
+        </div>
 
-    // Manejar el loop infinito
-    track.addEventListener('transitionend', handleInfiniteLoop, { once: true });
-    
-    // Destacar la tarjeta central después de la transición
-    setTimeout(highlightCenterCard, 400);
-  }
+        <!-- Cointhrive -->
+        <div
+          class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-end reveal cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
+          <div class="absolute inset-0 bg-green-900/30 group-hover:scale-105 transition-transform duration-700"></div>
 
-  function handleInfiniteLoop() {
-    // Si llegamos al final del segundo conjunto, saltar al principio del segundo conjunto
-    if (currentIndex >= projects.length * 2) {
-      track.style.transition = 'none';
-      currentIndex = projects.length;
-      const newOffset = (960 / 2) - (cardWidth / 2) - (currentIndex * cardWidth);
-      track.style.transform = `translateX(${newOffset}px)`;
-    }
-    // Si llegamos al principio del primer conjunto, saltar al final del segundo conjunto
-    else if (currentIndex < projects.length) {
-      track.style.transition = 'none';
-      currentIndex = projects.length * 2 - 1;
-      const newOffset = (960 / 2) - (cardWidth / 2) - (currentIndex * cardWidth);
-      track.style.transform = `translateX(${newOffset}px)`;
-    }
-  }
+          <div class="relative z-20">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-white">Cointhrive</h3>
+              <a href="https://github.com/Figueira205/Cointhrive-Mobile" target="_blank"
+                class="text-white bg-white/10 p-2 rounded-full hover:bg-white/20 transition"><i
+                  class="fab fa-github"></i></a>
+            </div>
+            <p class="text-zinc-300 text-sm mb-4">App móvil de finanzas personales.</p>
+            <div class="flex gap-2">
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-green-500/50 text-white">Mobile</span>
+              <span class="px-2 py-1 text-[10px] font-bold rounded-full bg-zinc-700/50 text-white">Finance</span>
+            </div>
+          </div>
+        </div>
 
-  document.getElementById('carousel-prev').onclick = () => slide('prev');
-  document.getElementById('carousel-next').onclick = () => slide('next');
-
-  // Swipe (táctil y mouse)
-  let startX = null;
-  let isDragging = false;
-  const trackDiv = document.getElementById('carousel-viewport');
-
-  trackDiv.addEventListener('mousedown', e => {
-    startX = e.clientX;
-    isDragging = true;
-    e.preventDefault();
-  });
-
-  trackDiv.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    e.preventDefault();
-  });
-
-  trackDiv.addEventListener('mouseup', e => {
-    if (startX !== null && isDragging) {
-      const diff = e.clientX - startX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) slide('prev');
-        else slide('next');
-      }
-    }
-    startX = null;
-    isDragging = false;
-  });
-
-  trackDiv.addEventListener('mouseleave', () => {
-    startX = null;
-    isDragging = false;
-  });
-
-  // Touch events
-  trackDiv.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  });
-
-  trackDiv.addEventListener('touchend', e => {
-    if (startX !== null) {
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) slide('prev');
-        else slide('next');
-      }
-      startX = null;
-    }
-  });
-
-  // Inicializar carrusel
-  initCarousel();
-</script>
-
-  <section id="contact" class="py-20 bg-gray-50 fade-in">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h3 class="text-3xl font-bold mb-6">Contáctame</h3>
-      <p class="mb-4">¿Tienes un proyecto en mente o deseas saber más? Estoy disponible para colaboraciones.</p>
-      <a href="mailto:figueira205@proton.me" class="text-blue-600 font-medium">figueira205@proton.me</a>
+      </div>
     </div>
   </section>
 
-  <footer class="text-center py-6 text-sm text-gray-500">
-    &copy; 2025 Jose Figueira. Todos los derechos reservados.
-  </footer>
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 px-4 relative overflow-hidden">
 
-  <script>
-    // Animaciones fade-in al hacer scroll
-    const elements = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    <div
+      class="glass max-w-3xl mx-auto rounded-3xl p-10 md:p-16 text-center border border-indigo-500/20 shadow-2xl shadow-indigo-500/10 reveal">
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Empecemos a trabajar juntos</h2>
+      <p class="text-zinc-400 mb-10 text-lg">
+        ¿Tienes un proyecto en mente? Estoy disponible para crear soluciones web de alto impacto para tu negocio.
+      </p>
+      <a href="mailto:figueira205@proton.me"
+        class="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-full font-bold text-lg hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-500/30">
+        <i class="fas fa-envelope"></i> figueira205@proton.me
+      </a>
 
-    elements.forEach(el => observer.observe(el));
+      <div
+        class="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-zinc-500 text-sm">
+        <p>&copy; 2025 Jose Figueira.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="https://www.linkedin.com/in/jose-figueira205?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="hover:text-white transition">LinkedIn</a>
+          <a href="https://github.com/Figueira205" target="_blank" class="hover:text-white transition">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Modo oscuro
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const icon = document.getElementById('darkModeIcon');
-    const body = document.body;
-
-    function setDarkMode(enabled) {
-      if (enabled) {
-        body.classList.add('dark');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-      } else {
-        body.classList.remove('dark');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-      }
-      localStorage.setItem('darkMode', enabled ? '1' : '0');
-    }
-
-    // Inicializar según preferencia previa
-    setDarkMode(localStorage.getItem('darkMode') === '1');
-
-    toggleBtn.addEventListener('click', () => {
-      setDarkMode(!body.classList.contains('dark'));
-    });
-  </script>
+  <!-- Script JS -->
+  <script src="script.js"></script>
 </body>
+
 </html>

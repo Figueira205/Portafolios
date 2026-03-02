@@ -1,6 +1,26 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Intro Animation ---
+    const introOverlay = document.getElementById('intro-overlay');
+    const navbarContainer = document.getElementById('navbar-container');
+
+    if (introOverlay) {
+        // Fade out overlay after a short delay to ensure render
+        setTimeout(() => {
+            introOverlay.classList.add('opacity-0');
+            introOverlay.classList.add('pointer-events-none');
+        }, 100);
+
+        // Animate Navbar after overlay fades (1s transition + 0.5s delay = 1.5s)
+        if (navbarContainer) {
+            setTimeout(() => {
+                navbarContainer.classList.remove('opacity-0');
+                navbarContainer.classList.remove('-translate-y-10');
+            }, 1500);
+        }
+    }
     
     // --- Scroll Reveal Animation ---
     const revealElements = document.querySelectorAll('.reveal');

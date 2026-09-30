@@ -902,8 +902,21 @@ h2 > span {
   font-size: 37px;
 }
 .wine-bottle {
-  box-shadow: 12px 18px 30px #0008;
+  height: auto;
+  aspect-ratio: 80 / 278;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(12px 18px 12px #0008);
   transition: transform 0.7s;
+}
+.wine-bottle::before {
+  content: none;
+}
+.bottle-illustration {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .project-card:hover .wine-bottle {
   transform: rotate(-7deg) translateY(-5px);
@@ -1567,6 +1580,10 @@ dialog::backdrop {
   }
   .wine-copy strong {
     font-size: 28px;
+  }
+  .wine-bottle {
+    width: 50px;
+    margin-left: 8px;
   }
   .automation-copy {
     font-size: 25px;

@@ -14,7 +14,7 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231d1d1f'/%3E%3Ctext x='32' y='43' text-anchor='middle' fill='white' font-family='Arial' font-size='30' font-weight='700'%3Ejf%3C/text%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="styles.css?v=night-1" />
-    <link rel="stylesheet" href="effects.css?v=night-1" />
+    <link rel="stylesheet" href="effects.css?v=night-2" />
     <script src="script.js?v=night-1" defer></script>
   </head>
   <body>
@@ -390,9 +390,35 @@
             <div class="project-visual wine-visual" aria-hidden="true">
               <div class="wine-orbit"></div>
               <div class="wine-bottle">
-                <div class="bottle-label">
-                  <span>R</span><small>RAMÍREZ<br />DE LOSADA</small>
-                </div>
+                <svg class="bottle-illustration" viewBox="0 0 80 278" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                  <defs>
+                    <linearGradient id="wine-glass" x1="0" x2="1">
+                      <stop offset="0" stop-color="#0d1c16" />
+                      <stop offset=".28" stop-color="#344b3c" />
+                      <stop offset=".55" stop-color="#20372a" />
+                      <stop offset="1" stop-color="#0a1711" />
+                    </linearGradient>
+                    <linearGradient id="wine-capsule" x1="0" x2="1">
+                      <stop offset="0" stop-color="#21191c" />
+                      <stop offset=".35" stop-color="#5c444a" />
+                      <stop offset="1" stop-color="#271b20" />
+                    </linearGradient>
+                    <linearGradient id="wine-paper" x1="0" x2="1">
+                      <stop offset="0" stop-color="#d7c9af" />
+                      <stop offset=".45" stop-color="#f3e9d5" />
+                      <stop offset="1" stop-color="#dfd0b5" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M31 9H49V80C49 91 61 96 66 107C70 115 71 122 71 133V261Q71 272 61 272H19Q9 272 9 261V133C9 122 10 115 14 107C19 96 31 91 31 80Z" fill="url(#wine-glass)" stroke="#647763" stroke-opacity=".25" />
+                  <path d="M34 49V80C34 95 22 100 20 115C18 127 18 137 18 145M18 224V258" fill="none" stroke="#a4b29c" stroke-width="3" stroke-linecap="round" opacity=".18" />
+                  <rect x="29" y="4" width="22" height="45" rx="2" fill="url(#wine-capsule)" />
+                  <path d="M30 9H50M30 43H50" stroke="#b9a179" stroke-width="1" opacity=".7" />
+                  <path d="M9 149Q40 152 71 149V221Q40 224 9 221Z" fill="url(#wine-paper)" />
+                  <text x="40" y="184" text-anchor="middle" font-family="Georgia, serif" font-size="29" fill="#573931">R</text>
+                  <text x="40" y="202" text-anchor="middle" font-family="Arial, sans-serif" font-size="4" letter-spacing=".8" fill="#80684f">RAMÍREZ</text>
+                  <text x="40" y="209" text-anchor="middle" font-family="Arial, sans-serif" font-size="4" letter-spacing=".8" fill="#80684f">DE LOSADA</text>
+                  <path d="M17 265Q40 270 63 265" fill="none" stroke="#718269" stroke-width="2" opacity=".25" />
+                </svg>
               </div>
               <div class="wine-copy">
                 <small>CATÁLOGO DIGITAL</small

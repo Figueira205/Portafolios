@@ -306,3 +306,214 @@ dialog.addEventListener("close", () => {
   dialogOpener?.focus();
 });
 document.querySelector("#year").textContent = String(new Date().getFullYear());
+
+// Atmosphere and motion are optional; core navigation never depends on them.
+(() => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const motionButton = document.querySelector(".motion-toggle");
+  const canvas = document.querySelector("#ambient-canvas");
+  const context = canvas.getContext("2d");
+  let paused = false;
+  try {
+    paused = localStorage.getItem("portfolio-motion-paused") === "true";
+  } catch {
+    /* Storage can be unavailable in private contexts. */
+  }
+  let frame = 0;
+  let previousTime = 0;
+  let width = 0;
+  let height = 0;
+  let stars = [];
+  let pageVisible = !document.hidden;
+  const canAnimate = () => !paused && !reducedMotion.matches && pageVisible;
+
+  const revealElements = [
+    ...document.querySelectorAll(
+      ".section-heading, .project-card, .experience-row, .portrait-card, .about-copy, .capability-card, .contact-card",
+    ),
+  ];
+  revealElements.forEach((element) => {
+    element.classList.add("scroll-reveal");
+    if (
+      element.classList.contains("project-card") ||
+      element.classList.contains("capability-card")
+    ) {
+      const index = [...element.parentElement.children].indexOf(element);
+      element.style.setProperty(
+        "--reveal-delay",
+        `${(index % (innerWidth > 600 ? 2 : 1)) * 90}ms`,
+      );
+    }
+  });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.06, rootMargin: "0px 0px -22px 0px" },
+    );
+    revealElements.forEach((element) => observer.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+  }
+
+  const resize = () => {
+    width = innerWidth;
+    height = innerHeight;
+    const pixelRatio = Math.min(devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    context?.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    const count = width < 600 ? 20 : 42;
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: (Math.random() - 0.5) * 0.06,
+      radius: 0.5 + Math.random() * 0.7,
+      phase: Math.random() * Math.PI * 2,
+    }));
+  };
+  const draw = (time) => {
+    if (!context || !canAnimate()) {
+      frame = 0;
+      return;
+    }
+    const step = previousTime ? Math.min((time - previousTime) / 16.67, 2) : 1;
+    previousTime = time;
+    context.clearRect(0, 0, width, height);
+    stars.forEach((star, index) => {
+      star.x = (star.x + star.vx * step + width) % width;
+      star.y = (star.y + star.vy * step + height) % height;
+      const opacity = 0.18 + (Math.sin(time / 3000 + star.phase) + 1) * 0.13;
+      context.beginPath();
+      context.fillStyle = `rgba(174,196,241,${opacity})`;
+      context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      context.fill();
+      // Sparse connections create depth without an overwhelming particle field.
+      for (let j = index + 1; j < stars.length; j++) {
+        const other = stars[j];
+        const distance = Math.hypot(star.x - other.x, star.y - other.y);
+        if (distance > 110) continue;
+        context.beginPath();
+        context.strokeStyle = `rgba(147,175,230,${(1 - distance / 110) * 0.08})`;
+        context.lineWidth = 0.5;
+        context.moveTo(star.x, star.y);
+        context.lineTo(other.x, other.y);
+        context.stroke();
+      }
+    });
+    frame = requestAnimationFrame(draw);
+  };
+  const syncMotion = () => {
+    document.body.classList.toggle(
+      "motion-enabled",
+      !reducedMotion.matches && !paused,
+    );
+    document.body.classList.toggle(
+      "motion-paused",
+      paused || reducedMotion.matches || !pageVisible,
+    );
+    motionButton.setAttribute("aria-pressed", String(paused));
+    motionButton.setAttribute(
+      "aria-label",
+      paused ? "Activar animaciones de fondo" : "Pausar animaciones de fondo",
+    );
+    motionButton.querySelector(".motion-icon").textContent = paused ? "▷" : "Ⅱ";
+    motionButton.querySelector(".motion-label").textContent = paused
+      ? "Activar movimiento"
+      : "Pausar movimiento";
+    if (!canAnimate()) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+      context?.clearRect(0, 0, width, height);
+    } else if (!frame && context) {
+      frame = requestAnimationFrame(draw);
+    }
+  };
+  motionButton.addEventListener("click", () => {
+    paused = !paused;
+    try {
+      localStorage.setItem("portfolio-motion-paused", String(paused));
+    } catch {
+      /* Keep the control functional without storage. */
+    }
+    syncMotion();
+  });
+  reducedMotion.addEventListener("change", syncMotion);
+  document.addEventListener("visibilitychange", () => {
+    pageVisible = !document.hidden;
+    syncMotion();
+  });
+  let resizeFrame = 0;
+  window.addEventListener(
+    "resize",
+    () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(resize);
+    },
+    { passive: true },
+  );
+  resize();
+  syncMotion();
+
+  let scrollFrame = 0;
+  const onScroll = () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      const range = document.documentElement.scrollHeight - innerHeight;
+      const progress =
+        range > 0 ? Math.min(Math.max(scrollY / range, 0), 1) : 0;
+      document.querySelector(".scroll-progress").style.transform =
+        `scaleX(${progress})`;
+      document
+        .querySelector(".site-header")
+        .classList.toggle("is-scrolled", scrollY > 40);
+      scrollFrame = 0;
+    });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  document
+    .querySelectorAll(".project-card, .capability-card, [data-tilt]")
+    .forEach((element) => {
+      let hoverFrame = 0;
+      element.addEventListener(
+        "pointermove",
+        (event) => {
+          if (!finePointer.matches || reducedMotion.matches || paused) return;
+          cancelAnimationFrame(hoverFrame);
+          hoverFrame = requestAnimationFrame(() => {
+            const bounds = element.getBoundingClientRect();
+            const x = Math.min(
+              Math.max((event.clientX - bounds.left) / bounds.width, 0),
+              1,
+            );
+            const y = Math.min(
+              Math.max((event.clientY - bounds.top) / bounds.height, 0),
+              1,
+            );
+            element.style.setProperty("--spot-x", `${x * 100}%`);
+            element.style.setProperty("--spot-y", `${y * 100}%`);
+            if (element.hasAttribute("data-tilt")) {
+              element.style.setProperty("--tilt-x", `${(0.5 - y) * 6}deg`);
+              element.style.setProperty("--tilt-y", `${(x - 0.5) * 6}deg`);
+            }
+          });
+        },
+        { passive: true },
+      );
+      element.addEventListener("pointerleave", () => {
+        cancelAnimationFrame(hoverFrame);
+        element.style.setProperty("--tilt-x", "0deg");
+        element.style.setProperty("--tilt-y", "0deg");
+      });
+    });
+})();

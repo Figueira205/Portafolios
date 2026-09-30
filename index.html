@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f5f7" />
+    <meta name="theme-color" content="#070911" />
     <meta
       name="description"
       content="Jose Figueira: desarrollo frontend, diseño de experiencias digitales, Odoo y automatización. Explora proyectos web, plataformas de reservas y herramientas a medida."
@@ -13,10 +13,28 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231d1d1f'/%3E%3Ctext x='32' y='43' text-anchor='middle' fill='white' font-family='Arial' font-size='30' font-weight='700'%3Ejf%3C/text%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css?v=night-1" />
+    <link rel="stylesheet" href="effects.css?v=night-1" />
+    <script src="script.js?v=night-1" defer></script>
   </head>
   <body>
+    <div class="ambient-scene" aria-hidden="true">
+      <div class="aurora aurora-a"></div>
+      <div class="aurora aurora-b"></div>
+      <div class="ambient-grid"></div>
+      <canvas id="ambient-canvas"></canvas>
+      <div class="ambient-grain"></div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <button
+      class="motion-toggle"
+      type="button"
+      aria-pressed="false"
+      aria-label="Pausar animaciones de fondo"
+    >
+      <span class="motion-icon" aria-hidden="true">Ⅱ</span
+      ><span class="motion-label">Pausar movimiento</span>
+    </button>
     <a class="skip-link" href="#main">Ir al contenido</a>
     <header class="site-header">
       <div class="nav-wrap glass">
@@ -68,7 +86,6 @@
             >
           </div>
           <div class="hero-person">
-            <img src="foto.jpeg" width="112" height="128" alt="Jose Figueira" />
             <div>
               <b class="hero-person-name">Jose Figueira</b>
               <strong>Diseño con intención. Desarrollo con criterio.</strong
@@ -76,38 +93,36 @@
             </div>
           </div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="orb orb-one"></div>
-          <div class="orb orb-two"></div>
-          <div class="art-window glass">
-            <div class="window-bar">
-              <div class="window-dots"><i></i><i></i><i></i></div>
-              <span>Una idea, muchas posibilidades</span><span>↗</span>
-            </div>
-            <div class="art-window-content">
-              <span class="mini-eyebrow">DISEÑADO PARA LAS PERSONAS</span>
-              <div class="art-headline">
-                Menos fricción.<br /><span>Más posibilidades.</span>
-              </div>
-              <div class="art-line"></div>
-              <div class="art-line short"></div>
-              <div class="art-grid">
-                <div><span>↗</span><b>Web</b></div>
-                <div><span>⌘</span><b>Sistemas</b></div>
-                <div><span>✧</span><b>Automatización</b></div>
-              </div>
-            </div>
-          </div>
-          <div class="floating-card glass">
-            <span class="floating-icon">⌘</span>
+        <div class="hero-art">
+          <div class="portrait-halo" aria-hidden="true"></div>
+          <div class="orbit orbit-a" aria-hidden="true"></div>
+          <div class="orbit orbit-b" aria-hidden="true"></div>
+          <figure class="hero-portrait glass" data-tilt>
+            <img
+              src="assets/jose.jpeg"
+              width="1086"
+              height="1448"
+              alt="Jose Figueira, desarrollador frontend y especialista en automatización"
+              fetchpriority="high"
+            />
+            <div class="portrait-shade" aria-hidden="true"></div>
+            <figcaption>
+              <span class="portrait-kicker">LA PERSONA DETRÁS DEL CÓDIGO</span
+              ><strong>Jose Figueira<span>.</span></strong>
+              <p>Diseño. Desarrollo. Automatización.</p>
+            </figcaption>
+            <span class="portrait-corner" aria-hidden="true">↗</span>
+          </figure>
+          <div class="identity-chip glass" aria-hidden="true">
+            <span class="chip-icon">✧</span>
             <div>
-              <strong>De la idea al producto.</strong
-              ><span>Cada detalle tiene un propósito.</span>
+              <b>De la idea al producto.</b
+              ><small>Cada detalle tiene un propósito.</small>
             </div>
-            <span class="tiny-check">✓</span>
+            <span class="chip-light"></span>
           </div>
-          <div class="art-caption">
-            <span class="caption-line"></span> CRAFTED WITH CARE. BUILT TO WORK.
+          <div class="orbit-label glass" aria-hidden="true">
+            <span>⌘</span> CRAFTED WITH INTENTION
           </div>
         </div>
       </section>
@@ -678,13 +693,13 @@
         aria-labelledby="about-title"
       >
         <div class="about-grid">
-          <div class="portrait-card">
+          <div class="portrait-card" data-tilt>
             <img
-              src="recursos/yo.jpg"
+              src="assets/jose.jpeg"
               alt="Retrato de Jose Figueira"
               loading="lazy"
-              width="900"
-              height="1200"
+              width="1086"
+              height="1448"
             />
             <div class="portrait-label glass">
               <b>Jose Figueira</b><span>Frontend Developer & Automation</span>

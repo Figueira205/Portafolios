@@ -83,6 +83,21 @@
     }
   });
 
+  /* Tarjeta: clic, Intro o espacio la giran y revelan las estadísticas */
+  var card = $("#flip");
+  if (card) {
+    $$(".ar__stats i", card).forEach(function (bar, i) { bar.style.setProperty("--i", i); });
+    var faces = $$(".card__face", card);
+    var flip = function () {
+      var on = card.classList.toggle("is-flipped");
+      card.setAttribute("aria-pressed", on);
+      faces[0].setAttribute("aria-hidden", on);
+      faces[1].setAttribute("aria-hidden", !on);
+    };
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+  }
+
   if (reduce || !fine) return;
 
   /* Botones magnéticos */
@@ -105,25 +120,11 @@
       var r = photo.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
       cancelAnimationFrame(raf2);
-      raf2 = requestAnimationFrame(function () { photo.style.setProperty("--ry", px * 8 + "deg"); photo.style.setProperty("--rx", -py * 8 + "deg"); photo.style.setProperty("--mx", (px + 0.5) * 100 + "%"); photo.style.setProperty("--my", (py + 0.5) * 100 + "%"); });
+      raf2 = requestAnimationFrame(function () { photo.style.setProperty("--ry", px * 8 + "deg"); photo.style.setProperty("--rx", -py * 8 + "deg"); });
     });
     photo.addEventListener("pointerleave", function () { photo.style.setProperty("--ry", "0deg"); photo.style.setProperty("--rx", "0deg"); });
   }
 
-  /* Tarjeta: clic, Intro o espacio la giran y revelan las estadísticas */
-  var card = $("#flip");
-  if (card) {
-    $$(".cb__stats i", card).forEach(function (bar, i) { bar.style.setProperty("--i", i); });
-    var faces = $$(".card__face", card);
-    var flip = function () {
-      var on = card.classList.toggle("is-flipped");
-      card.setAttribute("aria-pressed", on);
-      faces[0].setAttribute("aria-hidden", on);
-      faces[1].setAttribute("aria-hidden", !on);
-    };
-    card.addEventListener("click", flip);
-    card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-  }
 })();
 
 /* Proyectos: entran desde su lado según la columna que ocupan */

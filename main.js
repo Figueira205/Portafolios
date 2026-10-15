@@ -137,3 +137,25 @@
   }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
   works.forEach(function (w) { io.observe(w); });
 })();
+
+/* Lenguajes: dispara la carga de la barra al verla y cuenta los porcentajes */
+(function () {
+  var box = document.querySelector(".langs");
+  if (!box || !("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var vals = Array.prototype.slice.call(box.querySelectorAll(".lb__v"));
+  var end = vals.map(function (v) { return parseFloat(v.textContent); });
+  box.querySelectorAll(".langs__list li").forEach(function (li, i) { li.style.setProperty("--n", i); });
+  vals.forEach(function (v) { v.textContent = "0.0%"; });
+  box.classList.add("anim");
+  new IntersectionObserver(function (es, io) {
+    if (!es[0].isIntersecting) return;
+    io.disconnect();
+    box.classList.add("is-in");
+    var t0 = performance.now();
+    (function tick(t) {
+      var p = Math.min(1, (t - t0 - 400) / 1800), k = p <= 0 ? 0 : 1 - Math.pow(1 - p, 3);
+      vals.forEach(function (v, i) { v.textContent = (end[i] * k).toFixed(1) + "%"; });
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }, { threshold: 0.35 }).observe(box);
+})();
